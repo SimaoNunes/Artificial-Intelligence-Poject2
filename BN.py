@@ -9,7 +9,8 @@ Created on Mon Oct 15 15:51:49 2018
 
 class Node():
     def __init__(self, prob, parents = []):
-        pass
+        self.prob = prob
+        self.parents = parents
     
     def computeProb(self, evid):
         pass
