@@ -13,8 +13,8 @@ class Node():
         self.parents = parents
     
     def computeProb(self, evid):
-        pass
-
+        if self.parents == []:
+            return [1-self.prob[0], self.prob[0]]
         return 0
     
 class BN():
