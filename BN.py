@@ -9,7 +9,7 @@ import numpy as np
 
 class Node():
     def __init__(self, prob, parents = []):
-        self.prob = prob
+        self.prob    = prob
         self.parents = parents
     
     def computeProb(self, evid):
@@ -22,15 +22,14 @@ class Node():
 
 class BN():
     def __init__(self, gra, prob):
-        pass
+        self.graph = gra
+        self.prob  = prob
 
     def computePostProb(self, evid):
-        pass
-               
         return 0
-        
         
     def computeJointProb(self, evid):
-        pass
-        
-        return 0
+        total = 0
+        for i in range(0,len(self.prob)):
+            total += self.prob[i].computeProb(evid)[evid[i]]               
+        return total
