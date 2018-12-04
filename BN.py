@@ -9,7 +9,7 @@ import numpy as np
 
 class Node():
     def __init__(self, prob, parents = []):
-        self.prob = prob
+        self.prob    = prob
         self.parents = parents
     
     def computeProb(self, evid):
@@ -22,17 +22,22 @@ class Node():
 
 class BN():
     def __init__(self, gra, prob):
+<<<<<<< HEAD
         self.gra = gra
         self.prob = prob
         pass
+=======
+        self.graph = gra
+        self.prob  = prob
+>>>>>>> f1660cba64b32b20c07b260782091e68a17e518a
 
     def computePostProb(self, evid):
         return 0
         
-        
     def computeJointProb(self, evid):
         total = 1
         for i in range(0,len(evid)):
+<<<<<<< HEAD
             total *= self.prob[i].computeProb(evid)[evid[i]]
         return total
 
@@ -65,3 +70,7 @@ for e1 in [0,1]:
                     jp.append(bn.computeJointProb((e1, e2, e3, e4, e5)))
 print(jp)
 print("sum joint %.3f (1)" % sum(jp))
+=======
+            total = total *  self.prob[i].computeProb(evid)[evid[i]]               
+        return total
+>>>>>>> f1660cba64b32b20c07b260782091e68a17e518a
