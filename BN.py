@@ -29,7 +29,7 @@ class BN():
         return 0
         
     def computeJointProb(self, evid):
-        total = 0
-        for i in range(0,len(self.prob)):
-            total += self.prob[i].computeProb(evid)[evid[i]]               
+        total = 1
+        for i in range(0,len(evid)):
+            total = total *  self.prob[i].computeProb(evid)[evid[i]]               
         return total
