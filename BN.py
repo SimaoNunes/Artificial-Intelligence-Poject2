@@ -14,7 +14,8 @@ class Node():
     
     def computeProb(self, evid):
         if self.parents == []:
-            return [1-self.prob[0], self.prob[0]]
+            return [ 1-self.prob[0], self.prob[0] ]
+        
         return 0
     
 class BN():
