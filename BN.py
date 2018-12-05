@@ -47,17 +47,18 @@ class BN():
                 else:
                     ev = ev + (abs(e),)
             total += bn.computeJointProb(ev)
-        # for i in range(0,2**(unknownNodes+1)):
-        #     c = 0
-        #     ev = ()
-        #     for e in evid:
-        #         if e == '[]' or e == -1:
-        #             ev + (binary_true[i][c],)
-        #             c += 1
-        #         else:
-        #             ev + (e,)
+        for i in range(0,2**(unknownNodes+1)):
+            c = 0
+            ev = ()
+            for e in evid:
+                if e == [] or e == -1:
+                    ev = ev + (binary_alpha[i][c],)
+                    c += 1
+                else:
+                    ev = ev + (e,)
+            alpha += bn.computeJointProb(ev)
             
-        return total
+        return total/alpha
 
         
         
