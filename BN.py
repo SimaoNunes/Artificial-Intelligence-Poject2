@@ -21,11 +21,12 @@ class Node():
             prob = prob[evid[parent]]
         return [1-prob, prob]
 
+
 class BN():
     def __init__(self, gra, prob):
         self.gra = gra
         self.prob = prob
-        pass
+
 
     def computePostProb(self, evid):
         unknownNodes = 0
@@ -68,8 +69,6 @@ class BN():
 
 
 
-
-
 gra = [[],[],[0,1],[2],[2]]
 p1 = Node( np.array([.001]), gra[0] ) # burglary
 p2 = Node( np.array([.002]), gra[1] ) # earthquake
@@ -79,6 +78,8 @@ p5 = Node( np.array([.01,.7]), gra[4] ) # marycalls
 prob = [p1,p2,p3,p4,p5]
 gra = [[],[],[0,1],[2],[2]]
 bn = BN(gra, prob)
+
+
 
 
 
