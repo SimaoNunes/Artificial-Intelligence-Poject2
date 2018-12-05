@@ -22,22 +22,29 @@ class Node():
 
 class BN():
     def __init__(self, gra, prob):
-<<<<<<< HEAD
         self.gra = gra
         self.prob = prob
         pass
-=======
-        self.graph = gra
-        self.prob  = prob
->>>>>>> f1660cba64b32b20c07b260782091e68a17e518a
 
     def computePostProb(self, evid):
-        return 0
+        evid_clean = []
+        for i in range(0,len(evid)):
+            if evid(i) == [] or evid(i) == -1:
+                evid_clean.append(0)
+            elif evid(i) == []:
+                evid_clean.append(0)
+                unknown = i
+            else:
+                evid_clean.append(1)
+        alpha = 1 / self.computeJointProb(evid_clean)
+        for i in range(0,unknown):
+
+
+        return evid_clean
         
     def computeJointProb(self, evid):
         total = 1
         for i in range(0,len(evid)):
-<<<<<<< HEAD
             total *= self.prob[i].computeProb(evid)[evid[i]]
         return total
 
@@ -70,7 +77,5 @@ for e1 in [0,1]:
                     jp.append(bn.computeJointProb((e1, e2, e3, e4, e5)))
 print(jp)
 print("sum joint %.3f (1)" % sum(jp))
-=======
-            total = total *  self.prob[i].computeProb(evid)[evid[i]]               
-        return total
->>>>>>> f1660cba64b32b20c07b260782091e68a17e518a
+
+print(bn.computePostProb((1,1,[],[],-1)))
