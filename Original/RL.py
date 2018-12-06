@@ -71,11 +71,11 @@ class finiteMDP:
         # implementar esta funcao
         
         if poltype == 'exploitation':
-            a = np.argmax(par[x])
+            pass
 
             
         elif poltype == 'exploration':
-            a = random de 0 a actions
+            pass
 
                 
         return a
