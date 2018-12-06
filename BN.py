@@ -6,6 +6,7 @@ Created on Mon Oct 15 15:51:49 2018
 """
 
 import numpy as np
+import itertools
 
 class Node():
     def __init__(self, prob, parents = []):
@@ -44,14 +45,15 @@ class BN():
 
         #alpha
         ev = ajudante(size, subTargetsID)
-        total += 1 / self.computeProb(ev)[1]
+        for i in range(0, len(subTargetsID)):
+            total += 1 / self.prob[i].computeProb(ev)[1]
 
         #target
         ev = ajudante(size, [targetID])
-        total += self.computeProb(ev)[1]
+        for i in range(0, len(targetID)):
+            total += self.prob[i].computeProb(ev)[1]
 
         #hidden values
-        for i in hiddenValuesID:
 
         return 0
 
@@ -71,7 +73,8 @@ def ajudante(size,ids):
         ev[id] = 1
     return ev
 
-
+lst = list(itertools.product([0, 1], repeat=2))
+print(lst)
     
 
 
