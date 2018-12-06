@@ -6,6 +6,8 @@ Created on Mon Oct 16 20:31:54 2017
 """
 import numpy as np
 import random
+from random import randint
+
 
 from tempfile import TemporaryFile
 outfile = TemporaryFile()
@@ -63,19 +65,27 @@ class finiteMDP:
             
     def traces2Q(self, trace):
                 # implementar esta funcao
-        
+        self.Q = np.zeros((self.nS,self.nA))
+        nQ = np.zeros((self.nS,self.nA))
+        ii = 0
+        while True:            
+            for tt in trace:
+                #[x, a, y, r]
+                nQ[int(tt[0]),int(tt[1])] = nQ[int(tt[0]),int(tt[1])] + 0.01 * (tt[3] + self.gamma * max(nQ[int(tt[2]),:]) - nQ[int(tt[0]),int(tt[1])])
+            ii = ii +1  
+            err = np.linalg.norm(self.Q-nQ)
+            self.Q = np.copy(nQ)
+            if err<1e-2:
+                break 
 
         return self.Q
     
     def policy(self, x, poltype = 'exploration', par = []):
         # implementar esta funcao
-        
         if poltype == 'exploitation':
             a = np.argmax(par[x])
-
         elif poltype == 'exploration':
-            a = random de 0 a actions
-
+            a = print(randint(0, self.nA))
         return a
     
     def Q2pol(self, Q, eta=5):
