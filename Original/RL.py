@@ -63,15 +63,23 @@ class finiteMDP:
             
     def traces2Q(self, trace):
         self.Q = np.zeros((self.nS,self.nA))
-        for i in range(0, len(trace)):
-            a = trace[i][1]
-            y = trace[i][2]
-            r = trace[i][4]
-            self.Q[i][a] = (self.Q[i][a])*(1-0.5) + 0.5*(r + self.gamma*(max(self.Q[y])))
+        alpha = 0.5
+        while True:
+            nQ = self.Q
+            for step in trace:
+                s = int(step[0])
+                a = int(step[1])
+                y = int(step[2])
+                r = int(step[3])
+                nQ[s][a] = (1-alpha)*(nQ[s][a]) + alpha*(r + self.gamma*(max(nQ[y])))
+            err = np.linalg.norm(self.Q-nQ)
+            self.Q = np.copy(nQ)
+            if err<1e-7:
+                break            
         return self.Q
     
+
     def policy(self, x, poltype = 'exploration', par = []):
-        # implementar esta funcao
         
         if poltype == 'exploitation':
             pass
@@ -81,8 +89,9 @@ class finiteMDP:
             pass
 
                 
-        return 0
+        return a
     
+        
     def Q2pol(self, Q, eta=5):
         # implementar esta funcao
         return np.exp(eta*Q)/np.dot(np.exp(eta*Q),np.array([[1,1],[1,1]]))
