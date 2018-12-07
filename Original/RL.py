@@ -6,6 +6,7 @@ Created on Mon Oct 16 20:31:54 2017
 """
 import numpy as np
 import random
+from random import randint
 
 from tempfile import TemporaryFile
 outfile = TemporaryFile()
@@ -65,7 +66,7 @@ class finiteMDP:
         self.Q = np.zeros((self.nS,self.nA))
         alpha = 0.5
         while True:
-            nQ = self.Q
+            nQ = np.copy(self.Q)
             for step in trace:
                 s = int(step[0])
                 a = int(step[1])
@@ -82,18 +83,15 @@ class finiteMDP:
     def policy(self, x, poltype = 'exploration', par = []):
         
         if poltype == 'exploitation':
-            pass
+            a = np.argmax(par[x])
 
-            
         elif poltype == 'exploration':
-            pass
+            a = random.randint(0,self.nA-1)
 
-                
         return a
-    
-        
+
+
     def Q2pol(self, Q, eta=5):
-        # implementar esta funcao
         return np.exp(eta*Q)/np.dot(np.exp(eta*Q),np.array([[1,1],[1,1]]))
 
 
